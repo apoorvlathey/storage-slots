@@ -6,9 +6,9 @@ export interface NetworkOption {
   chainId: number;
 }
 
-interface SelectedNetworkOption {
+export interface SelectedOption {
   label: string;
-  value: number;
+  value: number | string;
 }
 
-export type SelectedNetworkOptionState = SingleValue<SelectedNetworkOption>;
+export type SelectedOptionState = SingleValue<SelectedOption>;

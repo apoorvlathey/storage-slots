@@ -1,10 +1,12 @@
 import type { NextPage, GetStaticProps } from "next";
 import { useState } from "react";
-import { Heading, Container } from "@chakra-ui/react";
+import { Heading, Box, Container } from "@chakra-ui/react";
 import networksList from "evm-rpcs-list";
 import ContractAddress from "@/components/ContractAddress";
-import { NetworkOption, SelectedNetworkOptionState } from "@/types";
+import { NetworkOption, SelectedOptionState } from "@/types";
 import SelectNetwork from "@/components/SelectNetwork";
+import TabsSelector from "@/components/TabsSelector";
+import EIP1967Select from "@/components/EIP1967Select";
 
 interface Props {
   primaryNetworkOptions: NetworkOption[];
@@ -12,30 +14,56 @@ interface Props {
   allNetworksOptions: NetworkOption[];
 }
 
+const EIP1967Options = ["implementation", "admin", "beacon", "rollback"];
+
 const Home: NextPage<Props> = ({
   primaryNetworkOptions,
   secondaryNetworkOptions,
 }) => {
   const [address, setAddress] = useState<string>();
   const [selectedNetworkOption, setSelectedNetworkOption] =
-    useState<SelectedNetworkOptionState>({
+    useState<SelectedOptionState>({
       label: networksList[1].name, // Ethereum Mainnet
       value: 1,
     });
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  const [selectedEIP1967Slot, setSelectedEIP1967Slot] =
+    useState<SelectedOptionState>({
+      label: EIP1967Options[0],
+      value: EIP1967Options[0],
+    });
 
   return (
-    <Container my="8" minW={["0", "0", "2xl", "2xl"]}>
+    <Box my="8" minW={["0", "0", "2xl", "2xl"]}>
       <Heading textAlign="center" pt="2rem" fontFamily="Poppins" fontSize="5xl">
         Query Storage Slot
       </Heading>
-      <ContractAddress address={address} setAddress={setAddress} />
-      <SelectNetwork
-        primaryNetworkOptions={primaryNetworkOptions}
-        secondaryNetworkOptions={secondaryNetworkOptions}
-        selectedNetworkOption={selectedNetworkOption}
-        setSelectedNetworkOption={setSelectedNetworkOption}
+      <Container>
+        <ContractAddress address={address} setAddress={setAddress} />
+        <SelectNetwork
+          primaryNetworkOptions={primaryNetworkOptions}
+          secondaryNetworkOptions={secondaryNetworkOptions}
+          selectedNetworkOption={selectedNetworkOption}
+          setSelectedNetworkOption={setSelectedNetworkOption}
+        />
+      </Container>
+      <TabsSelector
+        selectedTabIndex={selectedTabIndex}
+        setSelectedTabIndex={setSelectedTabIndex}
       />
-    </Container>
+      {(() => {
+        switch (selectedTabIndex) {
+          case 0:
+            return (
+              <EIP1967Select
+                EIP1967Options={EIP1967Options}
+                selectedEIP1967Slot={selectedEIP1967Slot}
+                setSelectedEIP1967Slot={setSelectedEIP1967Slot}
+              />
+            );
+        }
+      })()}
+    </Box>
   );
 };
 

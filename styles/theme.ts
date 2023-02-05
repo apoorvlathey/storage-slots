@@ -24,6 +24,7 @@ const theme = extendTheme({
     global: (props: any) => ({
       body: {
         bg: "bg.900",
+        fontFamily: "Poppins",
       },
     }),
   },
