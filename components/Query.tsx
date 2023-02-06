@@ -18,7 +18,9 @@ export default function Query({ query }: { query: () => {} }) {
           setIsLoading(true);
           try {
             await query();
-          } catch {}
+          } catch (e) {
+            console.error(e);
+          }
           setIsLoading(false);
         }}
         isLoading={isLoading}

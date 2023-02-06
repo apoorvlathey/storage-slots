@@ -10,6 +10,7 @@ import TabsSelector from "@/components/TabsSelector";
 import EIP1967Select from "@/components/EIP1967Select";
 import Result from "@/components/Result";
 import Query from "@/components/Query";
+import StorageSlotInput from "@/components/StorageSlotInput";
 
 interface Props {
   primaryNetworkOptions: NetworkOption[];
@@ -36,34 +37,59 @@ const Home: NextPage<Props> = ({
       label: EIP1967Options[0],
       value: EIP1967Options[0],
     });
-  const [result, setResult] = useState<string>();
+  const [storageSlot, setStorageSlot] = useState<string>();
+  const [result, setResult] = useState<{
+    value?: string;
+    storageSlot?: string;
+    error?: string;
+  }>();
   const [formattedresult, setFormattedResult] = useState<string>();
 
   const query = async () => {
     // validate address
     if (!ethers.isAddress(address)) {
-      setResult("Error: Address is invalid");
+      setResult({ error: "Address is invalid" });
       return;
     }
 
     const provider = new ethers.JsonRpcProvider(
       networksList[selectedNetworkOption!.value].rpcs[0]
     );
-    const storageSlot = getEIP1967StorageSlot(
-      selectedEIP1967Slot!.value.toString()
-    );
-    const res = await provider.getStorage(address, storageSlot);
-    setResult(`Value: ${res}
-    \n\n
-      At storage slot: 0x${storageSlot.toString(16)}
-    `);
+    let _storageSlot =
+      selectedTabIndex === 0
+        ? getEIP1967StorageSlot(selectedEIP1967Slot!.value.toString())
+        : storageSlot;
 
-    // format
+    if (!_storageSlot) {
+      setResult({ error: "Storage slot not entered." });
+      return;
+    }
+
     try {
-      setFormattedResult(
-        ethers.AbiCoder.defaultAbiCoder().decode(["address"], res)[0]
-      );
-    } catch (e) {}
+      const res = await provider.getStorage(address, _storageSlot);
+
+      _storageSlot = _storageSlot.toString(16);
+      // add 0x in the beginning if doesn't exist (as returned via getEIP1967StorageSlot)
+      if (_storageSlot.substring(0, 2) !== "0x") {
+        _storageSlot = `0x${_storageSlot}`;
+      }
+
+      setResult({
+        value: res,
+        storageSlot: _storageSlot,
+      });
+
+      // format
+      try {
+        setFormattedResult(
+          ethers.AbiCoder.defaultAbiCoder().decode(["address"], res)[0]
+        );
+      } catch (e) {}
+    } catch (e) {
+      setResult({
+        error: "Invalid storage slot entered",
+      });
+    }
   };
 
   const getEIP1967StorageSlot = (key: string) => {
@@ -101,10 +127,17 @@ const Home: NextPage<Props> = ({
                 setSelectedEIP1967Slot={setSelectedEIP1967Slot}
               />
             );
+          case 1:
+            return (
+              <StorageSlotInput
+                storageSlot={storageSlot}
+                setStorageSlot={setStorageSlot}
+              />
+            );
         }
       })()}
       <Query query={query} />
-      {result && <Result result={result} />}
+      {(result?.value || result?.error) && <Result result={result} />}
     </Box>
   );
 };
