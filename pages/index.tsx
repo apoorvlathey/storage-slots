@@ -19,7 +19,6 @@ interface Props {
 }
 
 const EIP1967Options = ["implementation", "admin", "beacon", "rollback"];
-const solidityValueTypes = ["address", "uint256", "bool", "bytes", "int256"];
 
 const Home: NextPage<Props> = ({
   primaryNetworkOptions,
@@ -43,7 +42,6 @@ const Home: NextPage<Props> = ({
     storageSlot?: string;
     error?: string;
   }>();
-  const [formattedresult, setFormattedResult] = useState<string>();
 
   const query = async () => {
     // validate address
@@ -78,13 +76,6 @@ const Home: NextPage<Props> = ({
         value: res,
         storageSlot: _storageSlot,
       });
-
-      // format
-      try {
-        setFormattedResult(
-          ethers.AbiCoder.defaultAbiCoder().decode(["address"], res)[0]
-        );
-      } catch (e) {}
     } catch (e) {
       setResult({
         error: "Invalid storage slot entered",
