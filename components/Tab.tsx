@@ -15,7 +15,7 @@ export default function Tab({
 }: Props) {
   return (
     <HStack
-      fontWeight={"semibold"}
+      fontWeight={tabIndex === selectedTabIndex ? "bold" : "semibold"}
       color={tabIndex === selectedTabIndex ? "white" : "whiteAlpha.700"}
       role="group"
       _hover={{
