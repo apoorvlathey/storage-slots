@@ -29,13 +29,15 @@ export default function Footer() {
       <Spacer flex="1" />
       <VStack>
         <Heading size="md">
-          Built by:{" "}
-          <Social icon={faTwitter} link="https://twitter.com/apoorvlathey" />
-          <Link href="https://twitter.com/apoorvlathey" isExternal>
-            <Text decoration="underline" display="inline">
-              @apoorvlathey
-            </Text>
-          </Link>
+          <HStack>
+            <Text>Built by:</Text>{" "}
+            <Social icon={faTwitter} link="https://twitter.com/apoorvlathey" />
+            <Link href="https://twitter.com/apoorvlathey" isExternal>
+              <Text decoration="underline" display="inline">
+                @apoorvlathey
+              </Text>
+            </Link>
+          </HStack>
         </Heading>
         <Box pt={4}>
           <Alert bg="blackAlpha.400" shadow={"2xl"} color="white" rounded="lg">

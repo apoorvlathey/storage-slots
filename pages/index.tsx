@@ -13,6 +13,7 @@ import Query from "@/components/Query";
 import StorageSlotInput from "@/components/StorageSlotInput";
 import Footer from "@/components/Footer";
 import GitHubLink from "@/components/GitHubLink";
+import MetaHead from "@/components/MetaHead";
 
 interface Props {
   primaryNetworkOptions: NetworkOption[];
@@ -94,6 +95,7 @@ const Home: NextPage<Props> = ({
 
   return (
     <>
+      <MetaHead />
       <GitHubLink />
       <Box minW={["0", "0", "2xl", "2xl"]}>
         <Heading
