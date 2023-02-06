@@ -16,7 +16,7 @@ const fonts = {
 
 const config: ThemeConfig = {
   initialColorMode: "dark",
-  useSystemColorMode: true,
+  useSystemColorMode: false,
 };
 
 const theme = extendTheme({
@@ -25,6 +25,7 @@ const theme = extendTheme({
       body: {
         bg: "bg.900",
         fontFamily: "Poppins",
+        color: "white", // setting this default here prevents font color from flashing from black to white on page load
       },
     }),
   },
