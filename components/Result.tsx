@@ -23,10 +23,6 @@ export default function Result({
   const [formattedResult, setFormattedResult] = useState<string>();
 
   useEffect(() => {
-    console.log({ formattedResult });
-  }, [formattedResult]);
-
-  useEffect(() => {
     if (result.value) {
       if (selectedFormatOption?.value === "hex") {
         setFormattedResult(result.value);

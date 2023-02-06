@@ -1,11 +1,15 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@chakra-ui/icons': ^2.0.17
   '@chakra-ui/react': ^2.2.1
   '@chakra-ui/theme-tools': ^2.0.16
   '@emotion/react': ^11
   '@emotion/styled': ^11
   '@fontsource/poppins': ^4.5.10
+  '@fortawesome/fontawesome-svg-core': ^6.2.1
+  '@fortawesome/free-brands-svg-icons': ^6.2.1
+  '@fortawesome/react-fontawesome': ^0.2.0
   '@types/node': 17.0.42
   '@types/react': 18.0.12
   '@types/react-dom': 18.0.5
@@ -21,11 +25,15 @@ specifiers:
   typescript: 4.7.3
 
 dependencies:
+  '@chakra-ui/icons': 2.0.17_react@18.1.0
   '@chakra-ui/react': 2.4.9_adinpf654goqvnbqbwrxvgjpxq
   '@chakra-ui/theme-tools': 2.0.16
   '@emotion/react': 11.10.5_cbpnieqasrszcwkqeh5i7z7nse
   '@emotion/styled': 11.10.5_lljylcitqt7zoqhg5jav5djoqy
   '@fontsource/poppins': 4.5.10
+  '@fortawesome/fontawesome-svg-core': 6.2.1
+  '@fortawesome/free-brands-svg-icons': 6.2.1
+  '@fortawesome/react-fontawesome': 0.2.0_xpmhvuti5747ayywof2yuu27em
   chakra-react-select: 4.4.3_z72hqb5bfpxpch7dfvkmqqfdsy
   ethers: 6.0.2
   evm-rpcs-list: 2.0.1
@@ -367,6 +375,16 @@ packages:
       react: 18.1.0
     dev: false
 
+  /@chakra-ui/icon/3.0.16_react@18.1.0:
+    resolution: {integrity: sha512-RpA1X5Ptz8Mt39HSyEIW1wxAz2AXyf9H0JJ5HVx/dBdMZaGMDJ0HyyPBVci0m4RCoJuyG1HHG/DXJaVfUTVAeg==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/shared-utils': 2.0.5
+      react: 18.1.0
+    dev: false
+
   /@chakra-ui/icon/3.0.16_usmtyojbykp44v2uijjminsgay:
     resolution: {integrity: sha512-RpA1X5Ptz8Mt39HSyEIW1wxAz2AXyf9H0JJ5HVx/dBdMZaGMDJ0HyyPBVci0m4RCoJuyG1HHG/DXJaVfUTVAeg==}
     peerDependencies:
@@ -375,6 +393,16 @@ packages:
     dependencies:
       '@chakra-ui/shared-utils': 2.0.5
       '@chakra-ui/system': 2.4.0_yhugu32mwa5vrrl7iqxjawosfe
+      react: 18.1.0
+    dev: false
+
+  /@chakra-ui/icons/2.0.17_react@18.1.0:
+    resolution: {integrity: sha512-HMJP0WrJgAmFR9+Xh/CBH0nVnGMsJ4ZC8MK6tMgxPKd9/muvn0I4hsicHqdPlLpmB0TlxlhkBAKaVMtOdz6F0w==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/icon': 3.0.16_react@18.1.0
       react: 18.1.0
     dev: false
 
@@ -1355,6 +1383,39 @@ packages:
 
   /@fontsource/poppins/4.5.10:
     resolution: {integrity: sha512-oYZVHsnlwV3VWM1SE/m6SUxVh0QLk5+2wB+lBiXcI7N/0KVQWmV9YykaPqfJHBLvmdya+MAOnv+BQHeLU1vOOw==}
+    dev: false
+
+  /@fortawesome/fontawesome-common-types/6.2.1:
+    resolution: {integrity: sha512-Sz07mnQrTekFWLz5BMjOzHl/+NooTdW8F8kDQxjWwbpOJcnoSg4vUDng8d/WR1wOxM0O+CY9Zw0nR054riNYtQ==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dev: false
+
+  /@fortawesome/fontawesome-svg-core/6.2.1:
+    resolution: {integrity: sha512-HELwwbCz6C1XEcjzyT1Jugmz2NNklMrSPjZOWMlc+ZsHIVk+XOvOXLGGQtFBwSyqfJDNgRq4xBCwWOaZ/d9DEA==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.2.1
+    dev: false
+
+  /@fortawesome/free-brands-svg-icons/6.2.1:
+    resolution: {integrity: sha512-L8l4MfdHPmZlJ72PvzdfwOwbwcCAL0vx48tJRnI6u1PJXh+j2f3yDoKyQgO3qjEsgD5Fr2tQV/cPP8F/k6aUig==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.2.1
+    dev: false
+
+  /@fortawesome/react-fontawesome/0.2.0_xpmhvuti5747ayywof2yuu27em:
+    resolution: {integrity: sha512-uHg75Rb/XORTtVt7OS9WoK8uM276Ufi7gCzshVWkUJbHhh3svsUUeqXerrM96Wm7fRiDzfKRwSoahhMIkGAYHw==}
+    peerDependencies:
+      '@fortawesome/fontawesome-svg-core': ~1 || ~6
+      react: '>=16.3'
+    dependencies:
+      '@fortawesome/fontawesome-svg-core': 6.2.1
+      prop-types: 15.8.1
+      react: 18.1.0
     dev: false
 
   /@humanwhocodes/config-array/0.9.5:

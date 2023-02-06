@@ -11,6 +11,8 @@ import EIP1967Select from "@/components/EIP1967Select";
 import Result from "@/components/Result";
 import Query from "@/components/Query";
 import StorageSlotInput from "@/components/StorageSlotInput";
+import Footer from "@/components/Footer";
+import GitHubLink from "@/components/GitHubLink";
 
 interface Props {
   primaryNetworkOptions: NetworkOption[];
@@ -91,45 +93,54 @@ const Home: NextPage<Props> = ({
   };
 
   return (
-    <Box my="8" minW={["0", "0", "2xl", "2xl"]}>
-      <Heading textAlign="center" pt="2rem" fontFamily="Poppins" fontSize="5xl">
-        Query Storage Slot
-      </Heading>
-      <Container>
-        <ContractAddress address={address} setAddress={setAddress} />
-        <SelectNetwork
-          primaryNetworkOptions={primaryNetworkOptions}
-          secondaryNetworkOptions={secondaryNetworkOptions}
-          selectedNetworkOption={selectedNetworkOption}
-          setSelectedNetworkOption={setSelectedNetworkOption}
+    <>
+      <GitHubLink />
+      <Box minW={["0", "0", "2xl", "2xl"]}>
+        <Heading
+          textAlign="center"
+          pt="2rem"
+          fontFamily="Poppins"
+          fontSize="5xl"
+        >
+          Query Storage Slot
+        </Heading>
+        <Container>
+          <ContractAddress address={address} setAddress={setAddress} />
+          <SelectNetwork
+            primaryNetworkOptions={primaryNetworkOptions}
+            secondaryNetworkOptions={secondaryNetworkOptions}
+            selectedNetworkOption={selectedNetworkOption}
+            setSelectedNetworkOption={setSelectedNetworkOption}
+          />
+        </Container>
+        <TabsSelector
+          selectedTabIndex={selectedTabIndex}
+          setSelectedTabIndex={setSelectedTabIndex}
         />
-      </Container>
-      <TabsSelector
-        selectedTabIndex={selectedTabIndex}
-        setSelectedTabIndex={setSelectedTabIndex}
-      />
-      {(() => {
-        switch (selectedTabIndex) {
-          case 0:
-            return (
-              <EIP1967Select
-                EIP1967Options={EIP1967Options}
-                selectedEIP1967Slot={selectedEIP1967Slot}
-                setSelectedEIP1967Slot={setSelectedEIP1967Slot}
-              />
-            );
-          case 1:
-            return (
-              <StorageSlotInput
-                storageSlot={storageSlot}
-                setStorageSlot={setStorageSlot}
-              />
-            );
-        }
-      })()}
-      <Query query={query} />
-      {(result?.value || result?.error) && <Result result={result} />}
-    </Box>
+        {(() => {
+          switch (selectedTabIndex) {
+            case 0:
+              return (
+                <EIP1967Select
+                  EIP1967Options={EIP1967Options}
+                  selectedEIP1967Slot={selectedEIP1967Slot}
+                  setSelectedEIP1967Slot={setSelectedEIP1967Slot}
+                />
+              );
+            case 1:
+              return (
+                <StorageSlotInput
+                  storageSlot={storageSlot}
+                  setStorageSlot={setStorageSlot}
+                />
+              );
+          }
+        })()}
+        <Query query={query} />
+        {(result?.value || result?.error) && <Result result={result} />}
+      </Box>
+      <Footer />
+    </>
   );
 };
 
